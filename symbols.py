@@ -35,6 +35,27 @@ class LinearSymbol:
         return self + other * -1
 
 
+class NonDetSymbol:
+    def __init__(self, value=None):
+        self.values = set()
+        if value:
+            self.values.add(value)
+
+    @staticmethod
+    def promote(n):
+        return NonDetSymbol(n)
+
+    def __add__(self, other):
+        if isinstance(other, int):
+            return self + NonDetSymbol.promote(other)
+        assert isinstance(other, NonDetSymbol)
+        sum_ = NonDetSymbol()
+        for x in self.values:
+            for y in other.values:
+                sum_.values.add(x + y)
+        return sum_
+
+
 if __name__ == "__main__":
     from functions import *
     symbols = [LinearSymbol(f'x{i+1}') for i in range(12)]
