@@ -6,6 +6,23 @@ def un_reverse(text):
     return text[::-1]
 
 
+def if_function(text):
+    new_text = []
+    for c in text:
+        if c % 2 == 0:
+            new_text.append(c // 2)
+        else:
+            new_text.append(c * 2)
+    return new_text
+
+
+def check_if(text):
+    if if_function(text) == list(map(ord, "36ÂÎö:4bæ¾Òæ¾36\x1aÎú")):
+        print("Yay! Correct!")
+    else:
+        print("Sorry, that's not right. :(")
+
+
 def plus(text):
     return ''.join(
         list(map(chr, list(map(lambda x: x + 1, list(map(ord, text)))))))
