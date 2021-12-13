@@ -23,4 +23,4 @@ class System:
         for z3var in self.z3vars:
             self.solver.add(z3.And(0 <= z3var, z3var <= 255))
         if self.solver.check() == z3.sat:
-            print(self.solver.model()) # make dis list of ints
+            print(self.solver.model())  # make dis list of ints

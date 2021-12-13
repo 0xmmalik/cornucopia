@@ -9,12 +9,23 @@ def un_reverse(text):
 def if_function(text):
     new_text = []
     for c in text:
-        if c % 2 == 0:
+        if int(c / 2 - 0.5) == int(c / 2):
             new_text.append(c // 2)
         else:
             new_text.append(c * 2)
     return new_text
 
+
+def new_if_function(text):
+    new_text = []
+    for c in text:
+        x1 = c // 2
+        x2 = c * 2
+        if int(c / 2 - 0.5) == int(c / 2):
+            new_text.append(x1)
+        else:
+            new_text.append(x2)
+    return new_text
 
 def check_if(text):
     if if_function(text) == list(map(ord, "36ÂÎö:4bæ¾Òæ¾36\x1aÎú")):

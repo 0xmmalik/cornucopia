@@ -34,6 +34,9 @@ class LinearSymbol:
     def __sub__(self, other):
         return self + other * -1
 
+    def __div__(self, other):
+        return self * (1 / other)
+
 
 class NonDetSymbol:
     def __init__(self, value=None):
@@ -55,13 +58,30 @@ class NonDetSymbol:
                 sum_.values.add(x + y)
         return sum_
 
+    def __mul__(self, other):
+        if isinstance(other, int):
+            return self * NonDetSymbol.promote(other)
+        assert isinstance(other, NonDetSymbol)
+        prod = NonDetSymbol()
+        for x in self.values:
+            for y in other.values:
+                prod.values.add(x * y)
+        return prod
+
+    def __sub__(self, other):
+        return self + other * -1
+
+    def __div__(self, other):
+        return self * (1 / other)
+
+
 
 if __name__ == "__main__":
     from functions import *
-    symbols = [LinearSymbol(f'x{i+1}') for i in range(12)]
-    x = shuffle(rewrite(symbols))
+    symbols = [NonDetSymbol(f'x{i+1}') for i in range(12)]
+    x = if_function(symbols)
     for symbol in x:
         print(symbol.coeffs)
     import solver
     n = solver.System(x)
-    n.solve([105, 118, 102, 103, 130, 117, 57, 112, 129, 57, 101, 133])
+    n.solve([51, 54, 194, 206])
